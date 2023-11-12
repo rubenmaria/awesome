@@ -124,7 +124,10 @@ local function program_launch_keys()
       }),
     awful.key({ modkey, shift}, "v",
       function()
-        awful.spawn.with_shell("~/.config/awesome/monitor-scripts/vga-laptop-res.sh")
+        awful.spawn.with_shell(
+          gears.filesystem.get_configuration_dir()
+          .."monitors/monitor-scripts/vga-laptop-res.sh"
+          )
       end,
       {
         description = "setup vga monitor mirror with right resolution",
