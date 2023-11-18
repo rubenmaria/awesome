@@ -14,7 +14,7 @@ local function all_clients()
       raise = true,
       keys = keybinds.client_keys,
       buttons = keybinds.client_buttons,
-      screen = screenInfo.left,
+      screen = screenInfo.primary,
       placement = awful.placement.no_overlap + awful.placement.no_offscreen,
       size_hints_honor = false,
       titlebars_enabled = true,
@@ -26,14 +26,15 @@ end
 local function floating_clients()
   return {
     rule_any = {
-      instance = {"firefox", "gpick"},
-      class = {},
-      name = {},
-      properties = {
-        titletitlebars_enabled = false,
-        floating = true,
+      instance = {},
+      class = {
+        "explorer.exe",
+        "leagueclientux.exe",
+        "leagueclient.exe",
       },
-    }
+      name = {},
+    },
+    properties = { floating = true },
   }
 end
 

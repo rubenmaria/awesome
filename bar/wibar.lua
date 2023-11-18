@@ -55,7 +55,7 @@ function wibar.construct_wibar_on_screen(screen)
       {
         calendar_widget,
         volume_widget,
-        battery_widget,
+        --battery_widget,
         layout = wibox.layout.align.horizontal
       }
     ),

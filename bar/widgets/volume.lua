@@ -18,7 +18,7 @@ local volume_widget    = wibox.widget({
   align = "center",
   valign = "center",
   widget = wibox.widget.textbox,
-  font = "JetbrainsMono Nerd Font " .. size,
+  font = "JetBrainsMonoNerdFontMono " .. size,
 })
 
 local function volume_string(icon, charge)
@@ -27,11 +27,11 @@ end
 
 local function update_volume_widget(level)
   if level == "100" then
-    volume_widget.text = volume_string("墳", level)
+    volume_widget.text = volume_string("󰕾 ", level)
   elseif level == "0" then
-    volume_widget.text = volume_string("婢", level)
+    volume_widget.text = volume_string("󰖁 ", level)
   else
-    volume_widget.text = volume_string("奔", level)
+    volume_widget.text = volume_string("󰖀 ", level)
   end
 end
 

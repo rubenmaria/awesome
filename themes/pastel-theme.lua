@@ -27,8 +27,8 @@ local main_color = "#FC810C"
 theme.name = "pastel"
 
 -- Font
-theme.font          = "JetbrainsMono Nerd Font 10.5"
-theme.tasklist_font = "JetbrainsMono Nerd Font 9"
+theme.font          = "FiraCode Nerd Font Mono 10.5"
+theme.tasklist_font = "FiraCode Nerd Font Mono 9"
 
 -- Background
 theme.bg_normal = "#1f2430"
