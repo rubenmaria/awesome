@@ -7,7 +7,9 @@ local keys      = require("keybinds")
 local startup   = {}
 
 local function init_theme()
-  beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/pastel-theme.lua")
+  beautiful.init(
+    gears.filesystem.get_configuration_dir().."themes/theme.lua"
+  )
 end
 
 local function set_wallpaper(screen)

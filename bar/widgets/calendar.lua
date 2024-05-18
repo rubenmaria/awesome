@@ -8,7 +8,7 @@ local widget_container = wibox.container
 local size             = 12
 local text_clock = wibox.widget.textclock(
     '<span color="#e49c18" font="JetbrainsMono Nerd Font '.. size ..
-    '"> %d.%m.%y</span>',
+    '">   %d.%m.%y</span>',
     5
   )
 

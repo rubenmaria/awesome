@@ -18,6 +18,8 @@ local function all_clients()
       placement = awful.placement.no_overlap + awful.placement.no_offscreen,
       size_hints_honor = false,
       titlebars_enabled = true,
+      maximized = false,
+      opacity = 1,
       floating = false
     }
   }
@@ -38,10 +40,31 @@ local function floating_clients()
   }
 end
 
+local function firefox()
+  return {
+    rule_any = {
+      instance = {},
+      class = {
+        "firefox",
+      },
+      name = {},
+    },
+    properties = {
+      maximized = false,
+      opacity = 1,
+      floating = false,
+      border_width = beautiful.border_width,
+      border_color = beautiful.border_normal
+    }
+  }
+
+end
+
 function rules.init_client_rules()
   awful.rules.rules = {
     all_clients(),
     floating_clients(),
+    firefox(),
   }
 end
 

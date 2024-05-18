@@ -4,7 +4,7 @@ local calendar_widget = require("bar.widgets.calendar")
 local clock_widget    = require("bar.widgets.clock")
 local volume_widget   = require("bar.widgets.volume")
 local battery_widget  = require("bar.widgets.battery")
-
+local naughty         = require("naughty")
 local wibar           = {}
 
 local function align_right(widget)
@@ -32,22 +32,32 @@ local function align_center(widget)
 end
 
 function wibar.construct_wibar_on_screen(screen)
+  local wibar_height_percent = 1 / 48
+  local widget_size_percent_relative_to_wibar = 2 / 5
+  local wibar_height = screen.geometry.height * wibar_height_percent
+  local widget_text_size = wibar_height * widget_size_percent_relative_to_wibar
   screen.mywibox = awful.wibar({
     position = "top",
     screen = screen,
-    height = 30
+    height = wibar_height
+  })
+
+
+  naughty.notify({
+    title = "debug",
+    text = tostring(screen.geometry.height)
   })
 
   screen.mywibox:setup {
     align_left(
       {
-        screen.mytaglist,
+        clock_widget.new_clock(widget_text_size),
         layout = wibox.layout.align.horizontal,
       }
     ),
     align_center(
       {
-        clock_widget,
+        screen.mytaglist,
         layout = wibox.layout.align.horizontal,
       }
     ),

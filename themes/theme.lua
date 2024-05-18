@@ -57,10 +57,13 @@ theme.border_focus  = "#FC810C"
 theme.border_marked = theme.fg_urgent
 
 -- Taglist
+theme.taglist_fg_focus = "#E3D217"
+theme.taglist_bg_focus = theme.bg_normal
 theme.taglist_bg_empty = theme.bg_normal
-theme.taglist_bg_occupied = "#ffff1a"
-theme.taglist_bg_urgent = "#d83f41"
-theme.taglist_bg_focus = theme.bg_focus
+theme.taglist_fg_occupied = "#ffffff"
+theme.taglist_bg_occupied = theme.bg_normal
+theme.taglist_fg_urgent = "#d83f41"
+theme.taglist_bg_urgent = theme.bg_normal
 theme.taglist_font = "JetbrainsMono Nerd Font 15"
 
 -- Tasklist
