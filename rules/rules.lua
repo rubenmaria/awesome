@@ -1,7 +1,7 @@
 local awful      = require("awful")
 local beautiful  = require("beautiful")
 local keybinds   = require("keybinds")
-local screenInfo = require("monitors")
+local screen_info = require("monitors")
 local rules      = {}
 
 local function all_clients()
@@ -14,7 +14,7 @@ local function all_clients()
       raise = true,
       keys = keybinds.client_keys,
       buttons = keybinds.client_buttons,
-      screen = screenInfo.primary,
+      screen = screen_info.primary,
       placement = awful.placement.no_overlap + awful.placement.no_offscreen,
       size_hints_honor = false,
       titlebars_enabled = true,
@@ -33,11 +33,29 @@ local function floating_clients()
         "explorer.exe",
         "leagueclientux.exe",
         "leagueclient.exe",
+        "zenity"
       },
       name = {},
     },
     properties = { floating = true },
   }
+end
+
+local function floating_middle()
+  return {
+    rule_any = {
+      instance = {},
+      class = {
+        "zenity",
+        "unityhub"
+      },
+      name = {
+        "Unity",
+      },
+    },
+    properties = { floating = true , placement = awful.placement.centered},
+  }
+
 end
 
 local function firefox()
@@ -65,6 +83,7 @@ function rules.init_client_rules()
     all_clients(),
     floating_clients(),
     firefox(),
+    floating_middle()
   }
 end
 

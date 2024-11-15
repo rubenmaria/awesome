@@ -8,20 +8,15 @@
 -- ===================================================================
 -- Initialization
 -- ===================================================================
-
-
-local xresources = require("beautiful.xresources")
-local gears = require("gears")
-local dpi = xresources.apply_dpi
+local const      = require("util.constants")
+local dpi        = require("beautiful").xresources.apply_dpi
+local colors     = require("themes.colors")
 local theme = {}
-
-
 
 
 -- ===================================================================
 -- Theme Variables
 -- ===================================================================
-local wallpaper_path = gears.filesystem.get_configuration_dir() .. "themes/wallpaper/"
 local main_color = "#FC810C"
 
 theme.name = "pastel"
@@ -37,7 +32,7 @@ theme.bg_focus = "#151821"
 theme.bg_urgent = "#ff3f41"
 theme.bg_minimize = "#444444"
 
-theme.wallpaper = wallpaper_path .. "night.jpg"
+theme.wallpaper = const.WALLPAPER_DIRECTORY .. "night.jpg"
 -- Foreground
 theme.fg_normal = main_color
 theme.fg_focus = "#e4e4e4"
@@ -87,7 +82,7 @@ theme.top_panel_height = dpi(26)
 theme.notification_max_width = dpi(350)
 
 -- System Tray
-theme.bg_systray = theme.bg_normal
+theme.bg_systray = colors["BlueGrey800"]
 theme.systray_icon_spacing = dpi(5)
 
 -- Titlebars

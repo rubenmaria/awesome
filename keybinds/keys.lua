@@ -121,13 +121,34 @@ local function program_launch_keys()
       {
         description = "open a terminal",
         group = "launcher"
-      }),
+      }
+    ),
+    awful.key({ modkey, }, "z",
+      function()
+        awful.spawn(programs.pdf_viewer)
+      end,
+      {
+        description = "open a pdf viewer",
+        group = "launcher"
+      }
+    ),
     awful.key({ modkey, shift}, "v",
       function()
         awful.spawn.with_shell(
           gears.filesystem.get_configuration_dir()
           .."monitors/monitor-scripts/vga-laptop-res.sh"
           )
+      end,
+      {
+        description = "setup vga monitor mirror with right resolution",
+        group = "launcher"
+      }),
+    awful.key({control, modkey, shift}, "w",
+      function()
+        awful.spawn.with_shell(
+          gears.filesystem.get_configuration_dir()
+          .."scripts/windows-reboot.sh"
+        )
       end,
       {
         description = "setup vga monitor mirror with right resolution",
@@ -157,12 +178,36 @@ local function awesome_keys()
         group = "awesome"
       }),
     awful.key({ modkey }, "d",
-      function() menubar.show() end,
+      function()
+        awful.spawn.with_shell(
+          gears.filesystem.get_configuration_dir()
+          .."../rofi/scripts/launcher_t4"
+          )
+      end,
       {
-        description = "show the menubar",
+        description = "Program launcher",
         group = "launcher"
       }),
-    awful.key({ modkey, }, "s",
+    awful.key({ modkey }, "p",
+      function()
+        awful.spawn.with_shell(
+          gears.filesystem.get_configuration_dir()
+          .."../rofi/scripts/powermenu_t2"
+          )
+      end,
+      {
+        description = "Show powermenu",
+        group = "launcher"
+      }),
+    awful.key({ modkey }, "s",
+      function()
+        awful.spawn.with_shell("flameshot gui")
+      end,
+      {
+        description = "Show powermenu",
+        group = "launcher"
+      }),
+    awful.key({ modkey, shift}, "s",
       hotkeys_popup.show_help,
       { description = "show help", group = "awesome" })
   )

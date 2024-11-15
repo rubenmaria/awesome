@@ -17,11 +17,13 @@ function tags.construct_taglist_on_screen(screen)
     screen  = screen,
     filter  = awful.widget.taglist.filter.all,
     buttons = keybinds.taglist_buttons,
-    style   = gears.rounded_rect,
+    style   = {
+      gears.shape.rounded_rect,
+    },
     layout  = {
       spacing = spacing_size,
       layout  = wibox.layout.fixed.horizontal
-      },
+    }
   }
 end
 
