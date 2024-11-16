@@ -10,8 +10,8 @@ function container.new_container(widget, fg_color, bg_color)
 				{
 					widget = widget,
 				},
-				left = dpi(5),
-				right = dpi(4),
+				left = dpi(8),
+				right = dpi(6),
 				top = 0,
 				bottom = 0,
 				widget = wibox.container.margin,
@@ -21,7 +21,7 @@ function container.new_container(widget, fg_color, bg_color)
 			bg = bg_color,
 			widget = wibox.container.background,
 		},
-		spacing = dpi(2),
+		spacing = dpi(4),
 		layout = wibox.layout.fixed.horizontal,
 	})
 end

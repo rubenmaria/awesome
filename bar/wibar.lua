@@ -4,7 +4,7 @@ local calendar_widget = require("bar.widgets.simple.calendar")
 local clock_widget = require("bar.widgets.simple.clock")
 local volume_widget = require("bar.widgets.simple.volume")
 local battery_widget = require("bar.widgets.simple.battery")
-local systray = require("bar.widgets.simple.systray")
+local systray_widget = require("bar.widgets.simple.systray")
 local beautiful = require("beautiful")
 local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
@@ -60,7 +60,7 @@ function wibar.construct_wibar_on_screen(screen)
 	screen.mywibox:setup({
 		align_left({
 			clock_widget,
-			screen == screen_info.primary and wibox.widget.systray or nil,
+			screen == screen_info.primary and systray_widget or nil,
 			layout = wibox.layout.align.horizontal,
 		}),
 		align_center({
