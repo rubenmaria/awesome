@@ -10,15 +10,6 @@ local MAIN_COLOR = "#FFFFFF"
 local BACKGROUND_COLOR = "#2E2E2E"
 local WATCH_TIMEOUT = 5
 
-local widget = wibox.widget({
-	align = "center",
-	valign = "center",
-	widget = wibox.widget.textbox,
-	markup = "",
-	font = "JetbrainsMono Nerd Font " .. FONT_SIZE,
-	ignore_markup = false,
-})
-
 local function show_battery_warning()
 	local warning_msg_title = "Houston, we have a problem"
 	local warning_msg_text = "Battery is dying"
@@ -42,29 +33,29 @@ local function battery_string(icon, charge)
 	return icon .. "  " .. charge .. "%"
 end
 
-local function update_battery_widget(charge, status)
+local function update_battery_widget(widget, charge, status)
 	local last_battery_check = os.time()
 	local warning_last_updated = os.difftime(os.time(), last_battery_check)
 	if status == "Charging" then
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	elseif charge == 100 then
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	elseif charge > 50 then
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	elseif charge > 30 then
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	elseif charge > 10 then
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	else
 		if warning_last_updated > 300 then
 			last_battery_check = os.time()
 			show_battery_warning()
 		end
-		widget.text = battery_string("", charge)
+		widget:set_text(battery_string("", charge))
 	end
 end
 
-local function update_widget(self, stdout)
+local function update_widget(widget, stdout)
 	local charge = 0
 	local status = ""
 	for s in stdout:gmatch("[^\r\n]+") do
@@ -77,10 +68,11 @@ local function update_widget(self, stdout)
 			end
 		end
 	end
-	update_battery_widget(charge, status)
+	update_battery_widget(widget, charge, status)
 end
 
-watch("acpi", WATCH_TIMEOUT, update_widget)
+local battery_widget = watch("acpi", WATCH_TIMEOUT, update_widget)
+battery_widget:set_font("JetbrainsMono Nerd Font " .. FONT_SIZE)
 
 local function show_battery_status()
 	awful.spawn.easy_async([[bash -c 'acpi']], function(stdout, _, _, _)
@@ -93,10 +85,10 @@ local function show_battery_status()
 	end)
 end
 
-widget:connect_signal("button::press", function(_, _, _, button)
+battery_widget:connect_signal("button::press", function(_, _, _, button)
 	if button == 1 then
 		show_battery_status()
 	end
 end)
 
-return container.new_container(widget, MAIN_COLOR, BACKGROUND_COLOR)
+return container.new_container(battery_widget, MAIN_COLOR, BACKGROUND_COLOR)
