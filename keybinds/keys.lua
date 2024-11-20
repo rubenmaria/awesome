@@ -112,9 +112,15 @@ local function program_launch_keys()
 				return c.pid == floating_terminal_pid
 			end
 			for c in awful.client.iterate(is_floating_terminal) do
-				c.minimized = not c.minimized
-				client.focus = c
-				c:raise()
+				if c.minimized then
+					c.minimized = false
+					client.focus = c
+					c:move_to_screen(awful.screen.focused())
+					c:move_to_tag(awful.tag.selected(awful.screen.focused()))
+					c:raise()
+					return
+				end
+				c.minimized = true
 			end
 		end, {
 			description = "open the floating terminal",
@@ -166,7 +172,7 @@ local function awesome_keys()
 			group = "awesome",
 		}),
 		awful.key({ modkey }, "d", function()
-			awful.spawn.with_shell(gears.filesystem.get_configuration_dir() .. "../rofi/scripts/launcher_t4")
+			menubar.show()
 		end, {
 			description = "Program launcher",
 			group = "launcher",
