@@ -10,8 +10,8 @@ PDF_FILE="$(
   ) |
     fzf --keep-right
 )"
-if [[ $PDF_FILE ]]; then
-  nohup zathura $PDF_FILE >/dev/null 2>&1 &
+if [ ! -z "${PDF_FILE}" ]; then
+  nohup zathura "${PDF_FILE}" >/dev/null 2>&1 &
 fi
 PPPID=$(awk '{print $4}' "/proc/$PPID/stat")
 kill $PPPID

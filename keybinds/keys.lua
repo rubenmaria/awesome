@@ -99,7 +99,16 @@ local function program_launch_keys()
 			group = "launcher",
 		}),
 		awful.key({ modkey }, "f", function()
-			if floating_terminal_pid == nil then
+			local is_floating_terminal = function(c)
+				return c.pid == floating_terminal_pid
+			end
+			local floating_terminal_client = nil
+
+			for c in awful.client.iterate(is_floating_terminal) do
+				floating_terminal_client = c
+			end
+
+			if floating_terminal_client == nil then
 				floating_terminal_pid = awful.spawn(programs.terminal, {
 					floating = true,
 					width = dpi(700),
@@ -108,20 +117,17 @@ local function program_launch_keys()
 				})
 				return
 			end
-			local is_floating_terminal = function(c)
-				return c.pid == floating_terminal_pid
+
+			if floating_terminal_client.minimized then
+				floating_terminal_client.minimized = false
+				client.focus = floating_terminal_client
+				floating_terminal_client:move_to_screen(awful.screen.focused())
+				floating_terminal_client:move_to_tag(awful.tag.selected(awful.screen.focused()))
+				floating_terminal_client:raise()
+				return
 			end
-			for c in awful.client.iterate(is_floating_terminal) do
-				if c.minimized then
-					c.minimized = false
-					client.focus = c
-					c:move_to_screen(awful.screen.focused())
-					c:move_to_tag(awful.tag.selected(awful.screen.focused()))
-					c:raise()
-					return
-				end
-				c.minimized = true
-			end
+
+			floating_terminal_client.minimized = true
 		end, {
 			description = "open the floating terminal",
 			group = "launcher",
@@ -206,9 +212,6 @@ local function client_keys()
 			awful.client.swap.bydirection("right", c)
 		end, { description = "swap with right client", group = "client" }),
 		awful.key({ modkey, shift }, "c", function(c)
-			if c.pid == floating_terminal_pid then
-				floating_terminal_pid = nil
-			end
 			c:kill()
 		end, { description = "close", group = "client" }),
 		awful.key({ modkey, shift }, "l", function(c)
