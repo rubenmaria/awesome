@@ -4,8 +4,9 @@ local wibox = require("wibox")
 local watch = require("awful.widget.watch")
 local constants = require("util.constants")
 local container = require("bar.widgets.simple.container")
+local dpi = require("beautiful").xresources.apply_dpi
 
-local FONT_SIZE = 10
+local FONT_SIZE = dpi(15)
 local MAIN_COLOR = "#FFFFFF"
 local BACKGROUND_COLOR = "#2E2E2E"
 local WATCH_TIMEOUT = 5

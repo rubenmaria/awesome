@@ -61,6 +61,7 @@ function wibar.construct_wibar_on_screen(screen)
 		align_left({
 			clock_widget,
 			screen == screen_info.primary and systray_widget or nil,
+			battery_widget,
 			layout = wibox.layout.align.horizontal,
 		}),
 		align_center({
@@ -70,7 +71,6 @@ function wibar.construct_wibar_on_screen(screen)
 		align_right({
 			calendar_widget,
 			volume_widget,
-			battery_widget,
 			layout = wibox.layout.align.horizontal,
 		}),
 		layout = wibox.layout.flex.horizontal,

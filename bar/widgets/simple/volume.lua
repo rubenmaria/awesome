@@ -4,13 +4,13 @@ local dpi = require("beautiful").xresources.apply_dpi
 
 local MAIN_COLOR = "#FFFFFF"
 local BACKGROUND_COLOR = "#2E2E2E"
-local FONT_SIZE = dpi(12)
+local FONT_SIZE = dpi(15)
 local WATCH_TIMEOUT = 1
 
 -- Volume icons: "墳奔婢婢"
 
 local function volume_string(icon, charge)
-	return icon .. charge .. "%"
+	return icon .. "  " .. charge .. "%"
 end
 
 local function update_volume_widget(widget, level)
