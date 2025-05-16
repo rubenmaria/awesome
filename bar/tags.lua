@@ -10,7 +10,7 @@ function tags.construct_taglist_on_screen(screen)
   awful.tag(
     {"𝜶", "𝜷", "𝜸", "𝜹", "𝜺", "𝜻", "𝜼", "𝜽", "𝜾" },
     screen,
-    awful.layout.layouts[3]
+    awful.layout.suit.tile.left
   )
 
   screen.mytaglist = awful.widget.taglist {
