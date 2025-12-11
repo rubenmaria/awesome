@@ -43,12 +43,7 @@ end
 
 local function tag_keys()
 	return gears.table.join(
-		awful.key({ modkey }, "Left", awful.tag.viewprev, {
-			description = "view previous",
-			group = "tag",
-		}),
-		awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
-		awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" })
+		awful.key({ modkey, shift }, "Tab", awful.tag.history.restore, { description = "go back", group = "tag" })
 	)
 end
 
@@ -158,8 +153,8 @@ local function program_launch_keys()
 			description = "setup vga monitor mirror with right resolution",
 			group = "launcher",
 		}),
-		awful.key({ modkey }, "e", function()
-			awful.spawn(programs.ide)
+		awful.key({ modkey, shift }, "e", function()
+			awful.spawn.with_shell(constatns.SCRIPTS_DIRECTORY .. "eduvpn.sh")
 		end, {
 			description = "open a IDE",
 			group = "launcher",
@@ -192,7 +187,7 @@ local function awesome_keys()
 		awful.key({ modkey }, "s", function()
 			awful.spawn.with_shell("flameshot gui")
 		end, {
-			description = "Show powermenu",
+			description = "make a screenshot",
 			group = "launcher",
 		}),
 		awful.key({ modkey, shift }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" })
@@ -222,22 +217,32 @@ local function client_keys()
 		end, { description = "move to screen", group = "client" }),
 		awful.key({ modkey, shift }, "Left", function(c)
 			c:relative_move(0, 0, -20, 0)
-		end, { description = "Make client smaller width", group = "client" }),
+		end, { description = "Make floating client smaller width", group = "client" }),
 		awful.key({ modkey }, "space", function(c)
 			c.floating = not c.floating
 		end, { description = "toggle floating mode", group = "client" }),
 		awful.key({ modkey, shift }, "Up", function(c)
 			c:relative_move(0, 0, 0, -20)
-		end, { description = "Make client smaller width", group = "client" }),
+		end, { description = "Make floating client smaller width", group = "client" }),
 		awful.key({ modkey, shift }, "Down", function(c)
 			c:relative_move(0, 0, 0, 20)
-		end, { description = "Make client smaller width", group = "client" }),
+		end, { description = "Make floating client smaller width", group = "client" }),
 		awful.key({ modkey, shift }, "Right", function(c)
 			c:relative_move(0, 0, 20, 0)
-		end, { description = "Make client smaller width", group = "client" })
-	)
+		end, { description = "Make floating client smaller width", group = "client" }),
+		awful.key({ modkey }, "Left", function(c)
+			awful.tag.incmwfact(-0.05)
+		end, { description = "Make tiling client smaller width", group = "layout" }),
+		awful.key({ modkey }, "Up", function(c)
+			awful.client.incwfact(0.05, c)
+		end, { description = "Make tiling client smaller width", group = "layout" }),
+		awful.key({ modkey }, "Down", function(c)
+			awful.client.incwfact(-0.05, c)
+		end, { description = "Make tiling client smaller width", group = "layout" }),
+		awful.key({ modkey }, "Right", function(c)
+			awful.tag.incmwfact(0.05)
+		end, { description = "Make tiling client bigger width", group = "layout" }))
 end
-
 local function client_mouse_buttons()
 	return {}
 end

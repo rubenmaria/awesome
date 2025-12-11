@@ -80,11 +80,11 @@ end
 
 function rules.init_client_rules()
   awful.rules.rules = {
-    all_clients(),
     floating_clients(),
+    floating_middle(),
     firefox(),
-    floating_middle()
-  }
+    all_clients()
+ }
 end
 
 return rules
