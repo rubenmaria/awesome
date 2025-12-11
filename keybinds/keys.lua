@@ -153,8 +153,8 @@ local function program_launch_keys()
 			description = "setup vga monitor mirror with right resolution",
 			group = "launcher",
 		}),
-		awful.key({ modkey }, "e", function()
-			awful.spawn(programs.ide)
+		awful.key({ modkey, shift }, "e", function()
+			awful.spawn.with_shell(constatns.SCRIPTS_DIRECTORY .. "eduvpn.sh")
 		end, {
 			description = "open a IDE",
 			group = "launcher",
